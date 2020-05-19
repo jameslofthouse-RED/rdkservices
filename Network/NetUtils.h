@@ -159,6 +159,7 @@ namespace WPEFramework {
             static bool envCheckBool(const char *key);
 
             static void getTmpFilename(const char *in, std::string &out);
+            static bool isValidEndpointURL(const std::string& endpoint);
 
         private:
             std::thread             m_netlinkMonitorThread;
@@ -173,6 +174,7 @@ namespace WPEFramework {
 
             static bool _createDefaultInterface(std::string &name);
             static bool _deleteDefaultInterface(std::string &name, std::string &gateway);
+            static bool _isCharacterIllegal(const int& c);
         };
     } // namespace Plugin
 } // namespace WPEFramework

@@ -510,6 +510,19 @@ namespace WPEFramework {
             return (inet_pton(AF_INET6, address.c_str(), &ipv6address) > 0);
         }
 
+        // Not every character can be used for endpoint
+        bool NetUtils::_isCharacterIllegal(const int& c)
+        {
+            //character must be "-./0-9a-zA-Z"
+            return (c < 45) || ((c > 57) && (c < 65)) || ((c > 90) && (c < 97)) || (c > 122);
+        }
+
+        // Check if valid - consist of only allowed characters
+        bool NetUtils::isValidEndpointURL(const std::string& endpoint)
+        {
+            return std::find_if(endpoint.begin(), endpoint.end(), _isCharacterIllegal) == endpoint.end();
+        }
+
         /*
          * See if the device is configured to use ipv6
          */
